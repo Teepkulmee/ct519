@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./myweb
+      dockerfile: Dockerfile
+    container_name: myweb
+    ports:
+      - "80:80"
+    volumes:
+      - ./myweb:/var/www/html
+
+  db:
+    image: mariadb:10.4
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myhobbies
+      MYSQL_USER: prateep
+      MYSQL_PASSWORD: 65130660
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+volumes:
+  db_data:
